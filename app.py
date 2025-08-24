@@ -3,15 +3,9 @@ from pydantic import BaseModel
 from typing import List, Union
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
-# ----------------------------
-# Pydantic Model
-# ----------------------------
 class TextInput(BaseModel):
     texts: Union[str, List[str]]
 
-# ----------------------------
-# Load Model at Startup
-# ----------------------------
 model_name = "unitary/toxic-bert"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
@@ -21,10 +15,7 @@ classifier = pipeline(
     model=model,
     tokenizer=tokenizer,
     return_all_scores=True
-)
-# ----------------------------
-# FastAPI App
-# ----------------------------
+
 app = FastAPI(title="Text Moderation API")
 @app.get("/")
 def root():
