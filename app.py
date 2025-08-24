@@ -19,7 +19,7 @@ classifier = pipeline(
 app = FastAPI(title="Text Moderation API")
 @app.get("/")
 def root():
-    return {"message": "Text Moderation API is running 🚀"}
+    return {"message": "Text Moderation API is running "}
 @app.post("/moderate")
 def moderate(input: TextInput):
     texts = input.texts if isinstance(input.texts, list) else [input.texts]
